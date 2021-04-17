@@ -55,6 +55,17 @@ paths:
                   popular:
                     type: boolean
                     example: false
+        401:
+          description: Response for when the github credentials are invalid.
+          content:
+            application/json:
+              schema:
+                required:
+                  - message
+                properties:
+                  message:
+                    type: string
+                    example: Invalid Github credentials. Set it as the env var GITHUB_ACCESS_TOKEN
         404:
           description: Wrong URL or repository doesn't exist.
           content:
