@@ -5,6 +5,17 @@ networks:
     driver: bridge
 
 services:
+  popular-repos:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: pr-server
+    environment:
+      - GITHUB_ACCESS_TOKEN=${GITHUB_ACCESS_TOKEN}
+    networks:
+      - app-tier
+    ports:
+      - "5000:5000"
   api_docs:
     container_name: pr-api-docs
     image: "swaggerapi/swagger-editor"
