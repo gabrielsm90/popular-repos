@@ -37,6 +37,74 @@ It's a web application presenting the endpoint
 
 `Black` for code formatting.
 
+## Project's Structure
+
+```
+popular-repos
+├── docs
+│   ├── popular_repos.yaml
+├── services
+│   ├── health_check
+│       ├── application
+│       │       ├── __init__.py
+│       │       ├── __main__.py
+│       │       ├── api_client.py
+│       │       ├── config.py
+│       ├── tests
+│       │       ├── __init__.py
+│       │       ├── test_scheduler.py
+│   ├── popular_repo_app
+│       ├── application
+│       │   ├── controllers
+│       │       ├── __init__.py
+│       │       ├── health.py
+│       │       ├── repositories.py
+│       │   ├── service
+│       │       ├── __init__.py
+│       │       ├── evaluator.py
+│       │       ├── exceptions.py
+│       │       ├── github_client.py
+│       │   ├── __init__.py
+│       │   ├── __main__.py
+│       │   ├── app.py
+│       │   ├── config.py
+│       ├── tests
+│       │   ├── __init__.py
+│       │   ├── test_application.py
+│       ├── Dockerfile
+│       ├── requirements.txt
+├── .coveragerc
+├── .flake8
+├── .gitignore
+├── docker-compose.yml
+├── README.md
+├── requirements-dev.txt
+```
+
+The `docs` folder holds the OAS documentation for the
+web application.
+
+`services` is where one will find the two services of 
+this project, the Web App that is used and exposed and
+the Health Checker.
+
+In the two services folder, one will find the same structure
+of a folder dedicated to the application, one folder with the
+automated tests, a Dockerfile for the service and the
+requirements for it.
+
+Still on the top level, we have two configuration files:
+
+- .coveragerc: Configuration for the test coverage.
+- .flake8: Configuration for the code linter.
+
+The file `docker-compose.yml` is used to spin up the services
+with Docker.
+
+Finally, a `requirements-dev.txt` so that the developer
+won't need to install requirements from different requirements
+files to have the development environment in place.
+
 ## Development
 
 ### Setting up the environment
