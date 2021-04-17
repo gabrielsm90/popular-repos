@@ -63,7 +63,9 @@ def assert_successful_response(response: Response, should_be_popular: bool):
     assert_successful_response_body(response.json, should_be_popular)
 
 
-def assert_successful_response_body(response_body: Dict[str, Any], should_be_popular: bool):
+def assert_successful_response_body(
+    response_body: Dict[str, Any], should_be_popular: bool
+):
     """
     Check if response body is valid.
 

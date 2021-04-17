@@ -1,0 +1,10 @@
+[flake8]
+
+application_import_names = application
+
+import-order-style = pep8
+
+max-line-length = 88
+
+per-file-ignores =
+    tests/*: F811, S101
