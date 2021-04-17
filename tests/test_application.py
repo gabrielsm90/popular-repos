@@ -63,7 +63,7 @@ def assert_successful_response(response: Response, should_be_popular: bool):
     assert_successful_response_body(response.json, should_be_popular)
 
 
-def assert_successful_response_body(response_body: Dict[str, Any], should_be_popular):
+def assert_successful_response_body(response_body: Dict[str, Any], should_be_popular: bool):
     """
     Check if response body is valid.
 
@@ -89,6 +89,14 @@ def assert_successful_response_body(response_body: Dict[str, Any], should_be_pop
         assert response_body["popular"]
     else:
         assert not response_body["popular"]
+    assert (
+        response_body["score"]
+        == 2 * response_body["num_forks"] + response_body["num_stars"]
+    )
+    if response_body["score"] < 500:
+        assert not response_body["popular"]
+    else:
+        assert response_body["popular"]
 
 
 def assert_wrong_credentials(response: Response):
