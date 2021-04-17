@@ -181,3 +181,32 @@ docker-compose up -d --build
 Once you run this command, you can access application in
 http://localhost:5000/ and the API documentation in 
 http://localhost:5001/
+
+## Next Steps
+
+The next steps in this project may be tackled in two groups.
+
+### Improvements of the current features
+
+To improve the application but without a change in the
+current features, two improvements would immediately 
+follow the current scenario.
+
+- Add Caching layer to the Web App endpoints.
+- Integrate a logging tool to the Health Checker, such
+  as ELK, so that the Error alarms would be easily 
+  accessible.
+  
+### New features
+
+As an improvement of features, there could be a mechanism
+that would store the results calculated by the REST service
+in a dedicated database.
+
+With the data stored, it would be possible to use Data Science
+and Machine Learning to get insights from the data.
+
+Things like "which repo is being queried a lot", "how long would
+it take to a repo become Popular since the first query", "how
+likely is a specific repo to become popular in the next X days"
+etc.
