@@ -1,4 +1,5 @@
 """Module to test the Falsk application."""
+from os import getenv
 from typing import Any, Dict
 
 import mock
@@ -76,7 +77,8 @@ def assert_successful_response_body(
     should_be_popular.
 
     Args:
-        response_body (Dict[str, Any]): Body of the response returned from the application.
+        response_body (Dict[str, Any]): Body of the response returned
+            from the application.
         should_be_popular (bool): Defines if the response should come
             with the popular field True or False.
 
@@ -120,7 +122,8 @@ def assert_wrong_credentials(response: Response):
     """
     assert response.status_code == 401
     assert response.json == {
-        "message": "Invalid Github credentials. Set it as the env var GITHUB_ACCESS_TOKEN"
+        "message": "Invalid Github credentials. Set it as the "
+                   "env var GITHUB_ACCESS_TOKEN"
     }
 
 
@@ -263,6 +266,7 @@ def test_get_repo_without_github_credentials(app_test_client: FlaskClient):
     """
     Config.GITHUB_ACCESS_TOKEN = None
     response = app_test_client.get("pallets/flask")
+    Config.GITHUB_ACCESS_TOKEN = getenv("GITHUB_ACCESS_TOKEN")
     assert_wrong_credentials(response)
 
 
@@ -278,4 +282,31 @@ def test_get_repo_with_invalid_github_credentials(app_test_client: FlaskClient):
     """
     Config.GITHUB_ACCESS_TOKEN = "invalid-token"
     response = app_test_client.get("pallets/flask")
+    Config.GITHUB_ACCESS_TOKEN = getenv("GITHUB_ACCESS_TOKEN")
     assert_wrong_credentials(response)
+
+
+def test_get_health_endpoint(app_test_client: FlaskClient):
+    """
+    Test the health endpoint.
+
+    Args:
+        app_test_client (FlaskClient): Test client for the application
+            provided out-of-the-box by the Flask framework.
+    """
+    response = app_test_client.get("health")
+    assert response.status_code == 200
+
+
+@mock.patch("requests.get")
+def test_get_health_endpoint_with_github_down(mocked_get: mock.MagicMock, app_test_client: FlaskClient):
+    """
+    Test the health endpoint with github down.
+
+    Args:
+        app_test_client (FlaskClient): Test client for the application
+            provided out-of-the-box by the Flask framework.
+    """
+    mocked_get.side_effect = Exception("Exception from github connection")
+    response = app_test_client.get("health")
+    assert response.status_code == 500
