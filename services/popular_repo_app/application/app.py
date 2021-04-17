@@ -2,8 +2,8 @@
 
 from flask import Flask
 
-from application.controllers.repositories import repositories
-from application.controllers.health import health
+from services.popular_repo_app.application.controllers.repositories import repositories
+from services.popular_repo_app.application.controllers.health import health
 
 
 def not_found_response(e):

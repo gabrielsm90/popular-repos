@@ -7,8 +7,8 @@ import pytest
 from flask.testing import FlaskClient
 from flask.wrappers import Response
 
-from application.app import app
-from application.config import Config
+from services.popular_repo_app.application.app import app
+from services.popular_repo_app.application.config import Config
 
 
 def assert_internal_server_response(response: Response):

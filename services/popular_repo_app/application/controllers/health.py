@@ -2,7 +2,7 @@
 
 from flask import Blueprint
 
-from application.service.github_client import check_github_api_connection
+from services.popular_repo_app.application.service.github_client import check_github_api_connection
 
 
 health = Blueprint("health", __name__)

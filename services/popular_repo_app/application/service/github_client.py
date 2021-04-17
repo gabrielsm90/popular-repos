@@ -4,7 +4,7 @@ from typing import Any, Dict
 
 import requests
 
-from application.config import Config
+from services.popular_repo_app.application.config import Config
 
 
 def check_github_api_connection():

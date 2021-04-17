@@ -1,6 +1,6 @@
 """Main module which starts the application."""
 
-from application.app import app
+from services.popular_repo_app.application.app import app
 
 
 if __name__ == "__main__":

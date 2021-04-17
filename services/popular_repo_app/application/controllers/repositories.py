@@ -2,8 +2,8 @@
 
 from flask import Blueprint, abort
 
-from application.service.exceptions import RepositoryNotFound, InvalidGithubCredentials
-from application.service.evaluator import get_repository_popularity
+from services.popular_repo_app.application.service.exceptions import RepositoryNotFound, InvalidGithubCredentials
+from services.popular_repo_app.application.service.evaluator import get_repository_popularity
 
 
 repositories = Blueprint("repositories", __name__)

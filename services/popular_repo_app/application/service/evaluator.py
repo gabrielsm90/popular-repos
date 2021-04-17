@@ -4,8 +4,8 @@ from typing import Dict, Union
 
 from requests.exceptions import HTTPError
 
-from application.service.exceptions import RepositoryNotFound, InvalidGithubCredentials
-from application.service.github_client import get_repository
+from services.popular_repo_app.application.service.exceptions import RepositoryNotFound, InvalidGithubCredentials
+from services.popular_repo_app.application.service.github_client import get_repository
 
 
 def calculate_score(num_stars: int, num_forks: int):
