@@ -1,0 +1,18 @@
+version: '2'
+
+networks:
+  app-tier:
+    driver: bridge
+
+services:
+  api_docs:
+    container_name: pr-api-docs
+    image: "swaggerapi/swagger-editor"
+    networks:
+      - app-tier
+    ports:
+      - "5001:8080"
+    volumes:
+      - .\docs:/tmp
+    environment:
+      - SWAGGER_FILE=/tmp/popular_repos.yaml

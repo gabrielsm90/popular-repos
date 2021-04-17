@@ -1,0 +1,79 @@
+openapi: "3.0.2"
+
+info:
+  title: Popular Github Repos API documentation.
+  version: "1.0"
+
+servers:
+  - url: https://localhost:5000/
+
+paths:
+
+  /{user_name}/{repo_name}:
+
+    parameters:
+      - name: user_name
+        in: path
+        required: true
+        description: The Github repo's owner's user name.
+        example: "gabrielsm90"
+        schema:
+          type: string
+      - name: repo_name
+        in: path
+        required: true
+        description: The name of the repository.
+        example: "popular-repos"
+        schema:
+          type: string
+
+    get:
+      summary: The only endpoint of the application which, given a Github repository, returns if said repository
+        is popular or not. A popular repository is characterized by having score >= 500, where score is the result
+        of <Number of Stars> * 1 + <Number of Forks> * 2.
+      responses:
+        200:
+          description: Valid response for retrieved assets.
+          content:
+            application/json:
+              schema:
+                required:
+                  - num_stars
+                  - num_forks
+                  - score
+                  - popular
+                properties:
+                  num_stars:
+                    type: integer
+                    example: 2
+                  num_forks:
+                    type: integer
+                    example: 4
+                  score:
+                    type: integer
+                    example: 10
+                  popular:
+                    type: boolean
+                    example: false
+        404:
+          description: Wrong URL or repository doesn't exist.
+          content:
+            application/json:
+              schema:
+                required:
+                  - message
+                properties:
+                  message:
+                    type: string
+                    example: Resource not found.
+        500:
+          description: Internal server problems.
+          content:
+            application/json:
+              schema:
+                required:
+                  - message
+                properties:
+                  message:
+                    type: string
+                    example: Internal server problems, please try again later.
