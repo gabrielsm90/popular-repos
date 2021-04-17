@@ -1,4 +1,4 @@
 [run]
 
 omit =
-    application/__main__.py
+    */__main__.py

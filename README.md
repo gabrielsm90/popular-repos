@@ -9,7 +9,7 @@ the score is calculated by the Repository's  Number of Stars
 multiplied by 1 plus the Repository's number of forks.
 
 It's a web application presenting the endpoint 
-`/{user_name}/{repo_name}`.
+`/{user_name}/{repository_name}`.
 
 ## Technology Stack
 
@@ -23,6 +23,8 @@ It's a web application presenting the endpoint
 
 `requests` to fetch the Github API.
 
+`apscheduler` to run the health checker.
+
 `pytest` for unit testing.
 
 ### Packaging
@@ -31,9 +33,9 @@ It's a web application presenting the endpoint
 
 ### Code Quality Checks
 
-`Flake8` for linting.
+`Flake8` for code linting.
 
-`Black` for formatting.
+`Black` for code formatting.
 
 ## Development
 
@@ -48,25 +50,55 @@ It's a web application presenting the endpoint
 
 #### Environment Variables
 
-To run and test the application, you must set your Github
-access token in an environment variable.
+To run and test the application, you must set two environment
+variables.
+
+#### Github Access Token
+
+The application fetches data from Github's API, so you
+need to set your credential in the env var GITHUB_ACCESS_TOKEN.
 
 - GITHUB_ACCESS_TOKEN = Your token to access the Github API
+  
+#### Python Path
+
+As a Python developer, you most certainly already have that
+env variable. So, here, you will need to add the path to
+the folder `popular-repos` inside your project.
+
+If you are running the tests from Pycharm IDE, it will take
+this step automatically for you.
 
 #### Requirements
 
-Install the requirements with:
+As a developer in this project, you will only need to
+install the requirements in the file `requirements-dev.txt`.
+
+This way we concentrate all the required libs in one file,
+but when deploying, Docker will only install the required
+libs for each microservice using the services specific
+requirement files.
 
 ```
-pip install -r requirements.txt && pip install -r requirements-dev.txt
+pip install -r requirements-dev.txt
 ```
 
-### Running the application automated tests
+### Running the project's automated tests
 
-In the Project's folder, run:
+We have two services in this project. 
+
+To run automated tests for the web application, go to the
+project's folder and run:
 
 ```
-pytest --cov-report term-missing --cov=application tests/`
+pytest --cov-report term-missing --cov=services\popular_repo_app\application services\popular_repo_app\tests\
+```
+
+And to run the tests of the health check, also in the project's
+folder:
+
+```
+pytest --cov-report term-missing --cov=services\health_check\application services\health_check\tests\
 ```
 
 ### Running the application locally

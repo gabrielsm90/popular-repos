@@ -16,6 +16,17 @@ services:
       - app-tier
     ports:
       - "5000:5000"
+  health_check:
+    build:
+      context: .
+      dockerfile: services/health_check/Dockerfile
+    container_name: pr-health-check
+    environment:
+      - POPULAR_REPOS_API_URL=http://popular-repos:5000/health
+    networks:
+      - app-tier
+    depends_on:
+      - popular-repos
   api_docs:
     container_name: pr-api-docs
     image: "swaggerapi/swagger-editor"
