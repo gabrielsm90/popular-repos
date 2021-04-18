@@ -11,6 +11,22 @@ multiplied by 1 plus the Repository's number of forks.
 It's a web application presenting the endpoint 
 `/{user_name}/{repository_name}`.
 
+## Services
+
+In order to achieve the requirements described previously,
+two microservices were designed.
+
+### Popular Repos Web App
+
+The actual RESTful API which accepts a repository and
+checks if that repository is popular.
+
+### Health Check
+
+A job scheduler running in background constantly sending
+requests to the Web App (dedicated endpoint) and logging
+if the app is healthy or not.
+
 ## Technology Stack
 
 ### Programming Language
@@ -85,7 +101,7 @@ The `docs` folder holds the OAS documentation for the
 web application.
 
 `services` is where one will find the two services of 
-this project, the Web App that is used and exposed and
+this project (previously described), the Web App and 
 the Health Checker.
 
 In the two services folder, one will find the same structure
@@ -121,18 +137,18 @@ files to have the development environment in place.
 To run and test the application, you must set two environment
 variables.
 
-#### Github Access Token
+##### Github Access Token
 
 The application fetches data from Github's API, so you
 need to set your credential in the env var GITHUB_ACCESS_TOKEN.
 
 - GITHUB_ACCESS_TOKEN = Your token to access the Github API
   
-#### Python Path
+##### Python Path
 
 As a Python developer, you most certainly already have that
 env variable. So, here, you will need to add the path to
-the folder `popular-repos` inside your project.
+the folder `popular-repos` on the PYTHONPATH var.
 
 If you are running the tests from Pycharm IDE, it will take
 this step automatically for you.
@@ -203,10 +219,11 @@ As an improvement of features, there could be a mechanism
 that would store the results calculated by the REST service
 in a dedicated database.
 
-With the data stored, it would be possible to use Data Science
-and Machine Learning to get insights from the data.
+With the data stored at each request, it would be possible 
+to use Data Science and Machine Learning to get insights 
+from the data.
 
-Things like "which repo is being queried a lot", "how long would
-it take to a repo become Popular since the first query", "how
-likely is a specific repo to become popular in the next X days"
-etc.
+Things like "which repo is being queried a lot", "how long 
+would it take to a repo become Popular since the first query", 
+"how likely is a specific repo to become popular in the next 
+X days" etc.
