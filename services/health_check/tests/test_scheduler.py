@@ -1,3 +1,5 @@
+"""Unit tests for the health checker."""
+
 import mock
 from requests import Response
 
@@ -12,7 +14,9 @@ def test_start_scheduler():
 
 @mock.patch("logging.info")
 @mock.patch("requests.get")
-def test_health_check_with_success(mocked_request: mock.MagicMock, mocked_log: mock.MagicMock):
+def test_health_check_with_success(
+    mocked_request: mock.MagicMock, mocked_log: mock.MagicMock
+):
     """Test health check with success."""
     response = Response()
     response.status_code = 200
@@ -23,13 +27,12 @@ def test_health_check_with_success(mocked_request: mock.MagicMock, mocked_log: m
 
 @mock.patch("logging.error")
 @mock.patch("requests.get")
-def test_health_check_with_fail(mocked_request: mock.MagicMock, mocked_log: mock.MagicMock):
+def test_health_check_with_fail(
+    mocked_request: mock.MagicMock, mocked_log: mock.MagicMock
+):
     """Test health check with success."""
     response = Response()
     response.status_code = 500
     mocked_request.return_value = response
     check_popular_repo_app_health()
     mocked_log.assert_called_once()
-
-
-

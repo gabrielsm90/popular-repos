@@ -15,7 +15,7 @@ def invalid_credentials_response(e):
     """Handle 401 errors."""
     return {
         "message": "Invalid Github credentials. Set it as "
-                   "the env var GITHUB_ACCESS_TOKEN"
+        "the env var GITHUB_ACCESS_TOKEN"
     }, 401
 
 

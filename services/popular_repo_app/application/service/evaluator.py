@@ -4,7 +4,10 @@ from typing import Dict, Union
 
 from requests.exceptions import HTTPError
 
-from services.popular_repo_app.application.service.exceptions import RepositoryNotFound, InvalidGithubCredentials
+from services.popular_repo_app.application.service.exceptions import (
+    RepositoryNotFound,
+    InvalidGithubCredentials,
+)
 from services.popular_repo_app.application.service.github_client import get_repository
 
 

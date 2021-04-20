@@ -1,4 +1,7 @@
+"""Module to communicate with the Popular Repo App API."""
+
 import logging
+
 import requests
 
 from services.health_check.application.config import Config

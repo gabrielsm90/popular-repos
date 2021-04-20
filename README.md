@@ -185,7 +185,7 @@ folder:
 pytest --cov-report term-missing --cov=services\health_check\application services\health_check\tests\
 ```
 
-### Running the application locally
+### Running the application with Docker
 
 To run the application locally, from the project's folder, 
 run the following command:
@@ -197,6 +197,21 @@ docker-compose up -d --build
 Once you run this command, you can access application in
 http://localhost:5000/ and the API documentation in 
 http://localhost:5001/
+
+### Running the application outside Docker
+
+To manually run the applications without Docker, you'll need
+to run `python application` on BOTH services.
+
+This command will trigger the files `__main__.py`.
+
+Once you start both services, you'll find the application
+serving in http://localhost:5000/.
+
+As for the API documentation, if you want to check the 
+content without having to spin up a docker container,
+you can just paste the content from `docs/popular_respos.yaml`
+into https://editor.swagger.io/.
 
 ## Next Steps
 

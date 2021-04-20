@@ -1,4 +1,24 @@
-"""Module to test the Falsk application."""
+"""
+Module to test the Flask application.
+
+For this microservice, an E2E testing approach was taken
+and, because of that, we have a few important gains when
+it comes to test coverage:
+
+- Meaningful metric. When you test from end to end and
+mock only third party applications, your test coverage
+gives you a clear picture of what's being properly
+tested because you know that the flows are not being
+triggered by mocked functions with biased inputs. One
+should keep in mind that pytest coverage shows exactly
+which lines are not being tested.
+
+- Flow control. By triggering the application in the way
+that it will be used in production (or close to it), the
+test coverage might help you find flows that are not being
+actioned (possible bugs or unachievable lines of code).
+"""
+
 from os import getenv
 from typing import Any, Dict
 
@@ -123,7 +143,7 @@ def assert_wrong_credentials(response: Response):
     assert response.status_code == 401
     assert response.json == {
         "message": "Invalid Github credentials. Set it as the "
-                   "env var GITHUB_ACCESS_TOKEN"
+        "env var GITHUB_ACCESS_TOKEN"
     }
 
 
@@ -299,7 +319,9 @@ def test_get_health_endpoint(app_test_client: FlaskClient):
 
 
 @mock.patch("requests.get")
-def test_get_health_endpoint_with_github_down(mocked_get: mock.MagicMock, app_test_client: FlaskClient):
+def test_get_health_endpoint_with_github_down(
+    mocked_get: mock.MagicMock, app_test_client: FlaskClient
+):
     """
     Test the health endpoint with github down.
 
